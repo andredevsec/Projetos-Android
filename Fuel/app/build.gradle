@@ -6,7 +6,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "br.edu.ifsuldeminas.fuel"
+        applicationId "br.edu.ifsuldeminas.mch.fuel"
         minSdk 30
         targetSdk 33
         versionCode 1
