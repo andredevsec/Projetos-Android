@@ -108,7 +108,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewMessage"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/share" />
+        app:srcCompat="@drawable/share"
+        android:onClick = "shareCLick"/>
 
     <TextView
         android:id="@+id/textViewMessage"

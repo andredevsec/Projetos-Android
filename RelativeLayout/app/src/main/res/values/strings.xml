@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RelativeLayout</string>
+    <string name="converter">Converter</string>
+    <string name="celsius" >Celsius</string>
+    <string name="conversor">Conversor de escalas de temperatura</string>
+    <string name="celsiusToF">Celsius para Fahrenheit: </string>
+    <string name="celsiusToK">Celsius para Kelvin: </string>
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewConversor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/conversor"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/textViewCelcius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/celsius"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/textViewConversor"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextCelsius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewCelcius"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@+id/textViewCelcius"
+        android:layout_toRightOf="@+id/textViewCelcius"
+        android:ems="8"
+        android:hint="Insira uma temperatura em °C"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/buttonConverter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextCelsius"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="32dp"
+        android:text="@string/converter"/>
+
+    <TextView
+        android:id="@+id/textViewResultadoCelsiusF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/celsiusToF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/buttonConverter"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewResultadoCelsiusK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/celsiusToK"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/textViewResultadoCelsiusF"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"/>
+
+</RelativeLayout>
