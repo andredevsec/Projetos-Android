@@ -7,8 +7,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
  private ImageView imageViewFuel;
  private ImageView imageViewShare;
  private TextView textViewMessage;
+ private static final String PREFS_KEY = "fuel_price";
+ private static final String PRECO_ETANOL = "prec_etanol";
+ private static final String PRECO_GASOLINA = "preco_gasolina";
+ private SharedPreferences preferences;
+
 
 
     @Override
@@ -34,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Carregar o preferences
+        preferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
 
         //carregar componentes
         textInputEditTextEtanol = findViewById(R.id.textInputEditTextEtanol);
@@ -114,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Double valorGas = Double.parseDouble(stringGas);
                 Double proporcao = valorEtanol/valorGas*100;
 
+                // mensagem de compartilhamento
                 String mensagem = String.format("Preços no posto '%s'. Etanol R$%.2f. Gasolina R$%.2f. " +
                         "Proporção %.1f%. Melhor usar '%s'.",
                         nomePostoStr, valorEtanol, valorGas, proporcao, proporcao>70 ? "Gasolina" : "Etanol");
@@ -129,11 +139,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // cancelar compartilhamento
         builder.setNegativeButton("Cancelar", null);
+
 
         AlertDialog dialog = builder.create();
         dialog.show();
 
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences.Editor editor = preferences.edit();
+
+        String valorEtanol = textInputEditTextEtanol.getText().toString();
+        if (!valorEtanol.equals("")) {
+            editor.putString(PRECO_ETANOL, valorEtanol);
+            // editor.commit(); ou A diferença que o comit é sincrono, pode trava
+            editor.apply(); // apply executa em segundo plano, nao trva a tela do aplicativo
+        }
+
+        String valorGasolina = textInputEditTextGas.getText().toString();
+        if(!valorGasolina.equals("")) {
+            editor.putString(PRECO_GASOLINA, valorGasolina);
+            editor.apply();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (preferences.contains((PRECO_ETANOL))) {
+            String precoEtanalSalvo = preferences.getString(PRECO_ETANOL, "");
+            textInputEditTextEtanol.setText((precoEtanalSalvo));
+        }
+
+        if(preferences.contains(PRECO_GASOLINA)) {
+            String precoGasSalvo = preferences.getString(PRECO_GASOLINA, "");
+            textInputEditTextGas.setText(precoGasSalvo);
+        }
     }
 }

@@ -3,10 +3,15 @@ package br.edu.ifsuldeminas.relativelayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // Atributos
@@ -15,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonConverter;
     private TextView textViewResultadoCelsiusF;
     private TextView textViewResultadoCelsiusK;
+    private Spinner SpinnerCelcius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         buttonConverter = findViewById(R.id.buttonConverter);
         textViewResultadoCelsiusF = findViewById(R.id.textViewResultadoCelsiusF);
         textViewResultadoCelsiusK = findViewById(R.id.textViewResultadoCelsiusK);
+        SpinnerCelcius = findViewById(R.id.SpinnerCelcius);
 
         escondeComponentes();
 
@@ -53,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
                 textViewResultadoCelsiusK.setVisibility(TextView.VISIBLE);
             }
         });
+    }
+
+    private void loadTemperatura() {
+
+        List<String> temperaturas = new ArrayList<String>();
+        temperaturas.add("Celsius");
+
+        ArrayAdapter<String> adapter = new
+                ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, temperaturas);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        SpinnerCelcius.setAdapter(adapter);
     }
 
     private void escondeComponentes() {
