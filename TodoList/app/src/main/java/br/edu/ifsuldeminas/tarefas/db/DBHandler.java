@@ -9,8 +9,8 @@ import androidx.annotation.Nullable;
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME= "tarefas.db";
     private static final Integer DB_VERSION = 1;
-    private static final String CREATE_TABLE = "CRATE TABLE IF NOT EXISTS tasks" +
-            "(id INTEGER PRIMARY KEY AUTOINCREMENTE," +
+    private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS tasks" +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "description text," +
             "active varchar(1))";
 

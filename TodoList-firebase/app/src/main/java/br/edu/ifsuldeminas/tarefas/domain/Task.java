@@ -1,24 +1,26 @@
 package br.edu.ifsuldeminas.tarefas.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Task implements Serializable {
-    private Integer id;
+    private String id;
     private String description;
     private Boolean active;
+    private Date dataChanged;
 
-    public Task (Integer id, String desc, Boolean active) {
+    public Task (String id, String desc) {
         this.id = id;
         description = desc;
-        this.active = active;
-
     }
 
-    public Integer getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,5 +49,13 @@ public class Task implements Serializable {
     public String toString() {
         String formatted = String.format("%s - %s", this.getDescription(), this.getActiveString());
         return formatted;
+    }
+
+    public Date getDataChanged() {
+        return dataChanged;
+    }
+
+    public void setDataChanged(Date dataChanged) {
+        this.dataChanged = Calendar.getInstance().getTime();
     }
 }

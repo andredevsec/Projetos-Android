@@ -6,17 +6,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import br.edu.ifsuldeminas.tarefas.db.DAOObserver;
 import br.edu.ifsuldeminas.tarefas.db.TaskDAO;
 import br.edu.ifsuldeminas.tarefas.domain.Task;
 
-public class FormActivity extends AppCompatActivity {
+public class FormActivity extends AppCompatActivity implements DAOObserver {
 
     private TextInputEditText description;
     private Task task;
@@ -49,7 +49,7 @@ public class FormActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         String desc = description.getText().toString();
 
@@ -60,7 +60,7 @@ public class FormActivity extends AppCompatActivity {
             TaskDAO dao = new TaskDAO(FormActivity.this);
 
             if(task == null) {
-                task = new Task (null, desc, true);
+                task = new Task (null, desc);
                 dao.save(task);
             } else {
                 task.setDescription(desc);

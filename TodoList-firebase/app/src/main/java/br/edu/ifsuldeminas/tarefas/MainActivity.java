@@ -1,6 +1,5 @@
 package br.edu.ifsuldeminas.tarefas;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,12 +16,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import br.edu.ifsuldeminas.tarefas.db.DAOObserver;
 import br.edu.ifsuldeminas.tarefas.db.TaskDAO;
 import br.edu.ifsuldeminas.tarefas.domain.Task;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DAOObserver {
 
     private ListView todoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         menuItemRemover.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+            public boolean onMenuItemClick(MenuItem menuItem) {
                 AdapterView.AdapterContextMenuInfo adapterView = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 Task task = (Task) todoList.getItemAtPosition(adapterView.position);
                 TaskDAO dao = new TaskDAO(MainActivity.this);
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         menuItemAtivar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+            public boolean onMenuItemClick(MenuItem menuItem) {
                 AdapterView.AdapterContextMenuInfo adapterView = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 Task task = (Task) todoList.getItemAtPosition(adapterView.position);
                 task.setActive(false);
@@ -99,7 +100,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadTasks();
+        //loadTasks();
+    }
+
+    private void updateTaskList() {
+        TaskDAO taskDAO = new TaskDAO(this);
+        taskDAO.loadTasks();
+    }
+
+    @Override
+    public void loadSuccess(List<Task> task) {
+
+        ArrayAdapter<Task> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, task);
+
+        todoList.setAdapter(adapter);
     }
 
     private void loadTasks () {
@@ -107,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
         List<Task> tasks = dao.listAll();
 
-        ArrayAdapter<Task> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tasks);
 
-        todoList.setAdapter(adapter);
     }
 }

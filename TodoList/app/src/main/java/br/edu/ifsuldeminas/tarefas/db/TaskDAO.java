@@ -21,9 +21,11 @@ public class TaskDAO extends DAO {
 
         ContentValues values = new ContentValues();
         values.put("description", task.getDescription());
-        values.put("active", task.getActive());
 
-        db.insert("task", null, values);
+        String active = task.getActive()? "1" : "0";
+        values.put("active", active);
+
+        db.insert("tasks", null, values);
         db.close();
 
         return true;
@@ -31,9 +33,26 @@ public class TaskDAO extends DAO {
     }
 
     public void update(Task task ){
+        SQLiteDatabase db = openToWrite();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("description", task.getDescription());
+        contentValues.put("active", task.getActive() ? "1" : "0");
+
+        String[] params = {task.getId().toString()};
+        db.update("tasks", contentValues, "id = ?",params);
+        db.close();
+
 
     }
     public void delete(Task task ){
+        SQLiteDatabase db = openToWrite();
+
+        String[] params = {task.getId().toString()};
+
+        db.delete("tasks", "id = ?", params);
+
+        db.close();
 
     }
     public List<Task> listAll () {
@@ -47,7 +66,7 @@ public class TaskDAO extends DAO {
             int id = cursor.getColumnIndexOrThrow("id");
             String desc = cursor.getString(cursor.getColumnIndexOrThrow("description"));
             String activeSTR = cursor.getString(cursor.getColumnIndexOrThrow("active"));
-            Boolean active = Boolean.getBoolean(activeSTR);
+            Boolean active = activeSTR.equals("1") ? true : false;
 
             Task task = new Task(id, desc, active);
             tasks.add(task);

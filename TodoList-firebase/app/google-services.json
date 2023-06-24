@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "742053880510",
+    "project_id": "tarefas-aula-875a5",
+    "storage_bucket": "tarefas-aula-875a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742053880510:android:c575e7efda39bdb5bf74ef",
+        "android_client_info": {
+          "package_name": "br.edu.ifsuldeminas.tarefas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742053880510-ntl4ui771r68o0qcs17uip1t4mgpnuq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ifsuldeminas.tarefas",
+            "certificate_hash": "01c1e4fd1f4b29a732c220f4dbc07ca2565f8d9c"
+          }
+        },
+        {
+          "client_id": "742053880510-s5j9kjli9lsmndvkeuaa1e8tr73cgdgd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApcfvB5VZLA4SZzvkVOwFp8tCKwJIlLHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742053880510-s5j9kjli9lsmndvkeuaa1e8tr73cgdgd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
